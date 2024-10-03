@@ -1,0 +1,57 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+     
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      
+    </ion-toolbar>
+  </ion-header>
+
+
+  <ion-item>
+    <ion-label position="floating">Nombre</ion-label>
+    <ion-input [(ngModel)]="newName" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Apellidos</ion-label>
+    <ion-input [(ngModel)]="newSurname" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Edad</ion-label>
+    <ion-input [(ngModel)]="newAge" type="text"></ion-input>
+  </ion-item>
+
+  
+  <ion-button expand="full" (click)="addPerson()">
+    Añadir Persona
+  </ion-button>
+
+  <!-- Mostrar mensaje si no hay personas -->
+  <div *ngIf="people.length === 0" class="ion-padding">
+    <ion-text color="medium">
+      No hay personas. Añade una nueva persona usando el formulario de arriba.
+    </ion-text>
+  </div>
+
+
+  <ion-grid *ngIf="people.length > 0">
+    <ion-row>
+      <ion-col *ngFor="let person of people; let i = index">
+        <app-personal-card 
+          [name]="person.name" 
+          [surname]="person.surname" 
+          [age]="person.age"
+          (delete)="deletePerson(i)">
+        </app-personal-card>      
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
